@@ -41,13 +41,12 @@ steps:
 - name: kaniko
   image: letfn/drone-kaniko
   settings:
-    args: --destination=letfn/container
+    args: --destination=defn/irssi
     cache: true
     cache_repo: defn/cache
-    dockerfile: alt/Dockerfile
     password:
       from_secret: docker_password
-    repo: letfn/container
+    repo: defn/irssi
     skip_tls_verify: true
     tag: latest
     username:

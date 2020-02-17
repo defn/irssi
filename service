@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function main {
+  set -exfu
+
+  screen -S irssi -d -m irssi -c EFNet "$@" &
+
+  exec /usr/sbin/sshd -D -o UseDNS=no -o PasswordAuthentication=no -o Port=2222 -e
+}
+
+main "$@"

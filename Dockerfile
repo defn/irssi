@@ -1,5 +1,15 @@
 FROM letfn/container
 
-COPY plugin /plugin
+USER root
+RUN apk add screen irssi openssh
+RUN ssh-keygen -A
+RUN chown -R app:app /etc/ssh /run
 
-ENTRYPOINT [ "/tini", "--", "/plugin" ]
+USER app
+
+RUN mkdir -p .irssi
+RUN ln -nfs /efs/config/irssi/config .irssi/
+
+COPY service /service
+
+ENTRYPOINT [ "/tini", "--", "/service" ]
